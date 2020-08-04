@@ -1,0 +1,6 @@
+.boardSize {
+    height: 650px;
+    width:650px;
+    border-color: black;
+    border-style: solid;
+}

@@ -7,14 +7,14 @@ class Board extends Component {
         super(props);
         this.state = {
             boardLayout: [
-                ["r","n","b","q","k","b","n","r"],
-                ["p","p","p","p","p","p","p","p"],
+                [".",".",".","q",".",".",".","."],
                 [".",".",".",".",".",".",".","."],
                 [".",".",".",".",".",".",".","."],
                 [".",".",".",".",".",".",".","."],
                 [".",".",".",".",".",".",".","."],
-                ["P","P","P","P","P","P","P","P"],
-                ["R","N","B","Q","K","B","N","R"]
+                [".",".",".",".",".",".",".","."],
+                [".",".",".",".",".",".",".","."],
+                [".",".",".","Q",".",".",".","."],
             ],
             playerMove: "W",
             castlingRight: "KQkq",
@@ -23,21 +23,44 @@ class Board extends Component {
             fullMoves: 0,
         };
     }
-    
 
     render() {
  
-        return (
-        <div className="boardSize"> 
-            {this.state.boardLayout.map(function(subarray,rowNum){
-                return subarray.map(function(squareState, colNum){
-                    return <Square key={rowNum,colNum} pos={{x:rowNum,y:colNum}}/>
-                })
-            })} 
+        return (  
+            <div className="boardSize"> 
+                {this.state.boardLayout.map(function(subarray,rowNum){
+                    return subarray.map(function(squareState, colNum){
+                        return <Square key={rowNum,colNum} pos={{x:rowNum,y:colNum}} squareState={squareState}/>
+                    })
+                })} 
 
-        </div>
+            </div>
         )
     }
 } 
 
 export default Board;
+
+
+// CODE GRAVEYARD
+// boardLayout: [
+//     ["r","n","b","q","k","b","n","r"], 
+//     ["p","p","p","p","p","p","p","p"],
+//     [".",".",".",".",".",".",".","."],
+//     [".",".",".",".",".",".",".","."],
+//     [".",".",".",".",".",".",".","."],
+//     [".",".",".",".",".",".",".","."],
+//     ["P","P","P","P","P","P","P","P"],
+//     ["R","N","B","Q","K","B","N","R"]
+// ],
+
+// boardLayout: [
+//     [".",".",".","q",".",".",".","."],
+//     [".",".",".",".",".",".",".","."],
+//     [".",".",".",".",".",".",".","."],
+//     [".",".",".",".",".",".",".","."],
+//     [".",".",".",".",".",".",".","."],
+//     [".",".",".",".",".",".",".","."],
+//     [".",".",".",".",".",".",".","."],
+//     [".",".",".","Q",".",".",".","."],
+// ],

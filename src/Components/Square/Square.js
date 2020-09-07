@@ -22,7 +22,8 @@ const Square = observer(({ pos=pos, squareState={squareState}}) => {
             case squareState === 'Q' || squareState === 'q':
                 return <Queen squareState={squareState}/> ;
             default:
-                return <div>.</div>
+                console.log(`Error loading Square State Square State Value = ${squareState}`)
+                return <div>Return Error</div>
         }
     }
 

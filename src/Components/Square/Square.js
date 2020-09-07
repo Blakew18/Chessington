@@ -19,8 +19,25 @@ const Square = observer(({ pos=pos, squareState={squareState}}) => {
 
     const getPiece = (squareState) => {
         switch (true) {
+            case squareState === 'K' || squareState === 'k':
+                //return <King squareState={squareState}/> ;
+                return <div>King</div>
             case squareState === 'Q' || squareState === 'q':
-                return <Queen squareState={squareState}/> ;
+                return <Queen squareState={squareState}/>;
+            case squareState === 'B' || squareState === 'b':
+                //return <Bishop squareState={squareState}/>; 
+                return <div>Bishop</div>                   
+            case squareState === 'N' || squareState === 'n':
+                //return <Knight squareState={squareState}/>;
+                return <div>Knight</div>          
+            case squareState === 'R' || squareState === 'r':
+                //return <Rook squareState={squareState}/>;
+                return <div>Rook</div>  
+            case squareState === 'P' || squareState === 'p':
+                //return <Pawn squareState={squareState}/>;
+                return <div>Pawn</div> 
+            case squareState === '.':
+                return          
             default:
                 console.log(`Error loading Square State Square State Value = ${squareState}`)
                 return <div>Return Error</div>

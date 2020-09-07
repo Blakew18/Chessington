@@ -1,44 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Square.css';
 import Queen from '../Pieces/Queen/Queen'
+import { useStores } from '../RootStoreProvider';
+import { observer } from 'mobx-react';
 
+const Square = observer(({ pos=pos, squareState={squareState}}) => {
 
-class Square extends Component {
+    const rootStore= useStores(); 
     
-    constructor(props) {
-        super(props);
-        this.state = {
-        
-        };
-      }
-
-    setColour() {
+    const setColour = () => {
         // Sets Colours for Each Square. If Row and Col are both Even OR Row and Col are both Odd then White else Black
-        if (this.props.pos.x % 2 === 0 & this.props.pos.y % 2 === 0 || this.props.pos.x % 2 !== 0 & this.props.pos.y % 2 !== 0 ){
+        if (pos.x % 2 === 0 & pos.y % 2 === 0 || pos.x % 2 !== 0 & pos.y % 2 !== 0 ){
             return "White"
         } else {
             return "Gray"
         }
     }
 
-    getPiece(squareState) {
+    const getPiece = (squareState) => {
         switch (true) {
             case squareState === 'Q' || squareState === 'q':
                 return <Queen squareState={squareState}/> ;
             default:
                 return <div>.</div>
-
         }
     }
 
-
-    render() {
         return (
-        <div style={{backgroundColor:this.setColour()}} className="square" > 
-            {this.getPiece(this.props.squareState)}
+        <div style={{backgroundColor:setColour()}} className="square" > 
+            {getPiece(squareState)}
         </div>
         )
-    }
-} 
+
+});
 
 export default Square;

@@ -1,66 +1,24 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './Board.css';
 import Square from '../Square/Square'
-class Board extends Component {
+import { useStores } from '../RootStoreProvider';
+import { observer } from 'mobx-react';
+
+const Board = observer(() => {
     
-    constructor(props) {
-        super(props);
-        this.state = {
-            boardLayout: [
-                [".",".",".","q",".",".",".","."],
-                [".",".",".",".",".",".",".","."],
-                [".",".",".",".",".",".",".","."],
-                [".",".",".",".",".",".",".","."],
-                [".",".",".",".",".",".",".","."],
-                [".",".",".",".",".",".",".","."],
-                [".",".",".",".",".",".",".","."],
-                [".",".",".","Q",".",".",".","."],
-            ],
-            playerMove: "W",
-            castlingRight: "KQkq",
-            enPassantAvailible:"-",
-            halfMoves: 0,
-            fullMoves: 0,
-        };
-    }
+    const rootStore= useStores();
 
-    render() {
- 
-        return (  
-            <div className="boardSize"> 
-                {this.state.boardLayout.map(function(subarray,rowNum){
-                    return subarray.map(function(squareState, colNum){
-                        return <Square key={rowNum,colNum} pos={{x:rowNum,y:colNum}} squareState={squareState}/>
-                    })
-                })} 
-
-            </div>
-        )
-    }
-} 
+    return (  
+        
+        <div className="boardSize"> 
+            {rootStore.getBoardState().map(function(subarray,rowNum){
+                return subarray.map(function(squareState, colNum){
+                    return <Square key={rowNum,colNum} pos={{x:rowNum,y:colNum}} squareState={squareState}/>
+                })
+            })} 
+        </div>
+   
+   )
+})
 
 export default Board;
-
-
-// CODE GRAVEYARD
-// boardLayout: [
-//     ["r","n","b","q","k","b","n","r"], 
-//     ["p","p","p","p","p","p","p","p"],
-//     [".",".",".",".",".",".",".","."],
-//     [".",".",".",".",".",".",".","."],
-//     [".",".",".",".",".",".",".","."],
-//     [".",".",".",".",".",".",".","."],
-//     ["P","P","P","P","P","P","P","P"],
-//     ["R","N","B","Q","K","B","N","R"]
-// ],
-
-// boardLayout: [
-//     [".",".",".","q",".",".",".","."],
-//     [".",".",".",".",".",".",".","."],
-//     [".",".",".",".",".",".",".","."],
-//     [".",".",".",".",".",".",".","."],
-//     [".",".",".",".",".",".",".","."],
-//     [".",".",".",".",".",".",".","."],
-//     [".",".",".",".",".",".",".","."],
-//     [".",".",".","Q",".",".",".","."],
-// ],

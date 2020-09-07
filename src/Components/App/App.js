@@ -7,7 +7,7 @@ import { RootStoreProvider } from '../RootStoreProvider';
 function App() {
   
   const [rootStore, setRootStore] = useState();
-  const [open, setOpen] = useState(false);
+
   
   useEffect(() => {
 

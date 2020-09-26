@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Board from '../Board/Board'
-import { setupRootStore } from '../../Models/root-store'; 
+import { RootStore, setupRootStore } from '../../Models/root-store'; 
 import { RootStoreProvider } from '../RootStoreProvider';
 
 function App() {
   
-  const [rootStore, setRootStore] = useState();
+  const [rootStore, setRootStore] = useState<RootStore>();
 
   
   useEffect(() => {

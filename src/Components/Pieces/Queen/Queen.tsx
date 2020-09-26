@@ -6,18 +6,22 @@ import './Queen.css';
 import poncQueen from './icons/poncQueen.svg'
 import pocQueen from './icons/pocQueen.svg'
 
-const Queen = observer(() => {
+interface QueenProps {
+  squareState: string
+}
+
+const Queen = observer(({squareState}:QueenProps) => {
   
   const rootStore= useStores();
 
-  const getColour = (squareState) => {
+  const getColour = (col:string) => {
     switch (true){
-      case squareState === "Q":
+      case col === "Q":
         return poncQueen
-      case squareState === "q":
+      case col === "q":
         return pocQueen
       default:
-        return null
+        return ""
     }
   }
 
@@ -26,7 +30,7 @@ const Queen = observer(() => {
   }
 
   return (
-    <img src={getColour("Q")} alt={"Q"} className="queen" onClick={clickHandler}/>
+    <img src={getColour(squareState)} alt={"Q"} className="queen" onClick={clickHandler}/>
   )
 });
 

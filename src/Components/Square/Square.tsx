@@ -4,20 +4,26 @@ import Queen from '../Pieces/Queen/Queen'
 import { useStores } from '../RootStoreProvider';
 import { observer } from 'mobx-react';
 
-const Square = observer(({ pos=pos, squareState={squareState}}) => {
+interface SquareProps {
+pos: any 
+squareState: string,
+}
+
+const Square = observer(({ pos, squareState}:SquareProps) => {
 
     const rootStore= useStores(); 
     
     const setColour = () => {
         // Sets Colours for Each Square. If Row and Col are both Even OR Row and Col are both Odd then White else Black
-        if (pos.x % 2 === 0 & pos.y % 2 === 0 || pos.x % 2 !== 0 & pos.y % 2 !== 0 ){
+        if (pos.x % 2 === 0 && pos.y % 2 === 0 || pos.x % 2 !== 0 && pos.y % 2 !== 0 ){
             return "White"
         } else {
             return "Gray"
         }
     }
 
-    const getPiece = (squareState) => {
+    const getPiece = (squareState:string) => {
+        
         switch (true) {
             case squareState === 'K' || squareState === 'k':
                 //return <King squareState={squareState}/> ;
@@ -38,9 +44,6 @@ const Square = observer(({ pos=pos, squareState={squareState}}) => {
                 return <div>Pawn</div> 
             case squareState === '.':
                 return          
-            default:
-                console.log(`Error loading Square State Square State Value = ${squareState}`)
-                return <div>Return Error</div>
         }
     }
 

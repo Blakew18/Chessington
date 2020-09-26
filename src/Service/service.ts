@@ -1,5 +1,5 @@
 
-export const stringTo2DArray = (string, row, col) => {
+export const stringTo2DArray = (string:string, row:number, col:number) => {
   const arr = [];
   var count = 0;
   

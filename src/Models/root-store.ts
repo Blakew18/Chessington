@@ -1,4 +1,4 @@
-import { types } from 'mobx-state-tree';
+import { types, Instance } from 'mobx-state-tree';
 import { stringTo2DArray } from '../Service/service'
 
 export const RootStoreModel = types
@@ -20,13 +20,10 @@ export const RootStoreModel = types
       },
     }
   });   
-  
-  
 
-
-
+  export type RootStore = Instance<typeof RootStoreModel>
   export const setupRootStore = async () => {
-    const rs = RootStoreModel.create({
+    const rs: RootStore = RootStoreModel.create({
       boardLayout: "rnbqkbnrpppppppp................................PPPPPPPPRNBQKBNR", 
       playerMove: "W",
       castlingRight: "KQkq",

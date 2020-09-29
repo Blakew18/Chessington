@@ -7,8 +7,8 @@ import { observer } from 'mobx-react';
 const Board = observer(() => {
     
     const rootStore= useStores();
-
-    return (  
+    
+    return (    
         
         <div className="boardSize"> 
             {rootStore.getBoardState().map(function(subarray:Array<string>,rowNum:number){
@@ -19,6 +19,7 @@ const Board = observer(() => {
         </div>
    
    )
+
 })
 
 export default Board;

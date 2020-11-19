@@ -3,6 +3,8 @@ import './App.css';
 import Board from '../Board/Board'
 import { setupRootStore } from '../../Models/root-store'; 
 import { RootStoreProvider } from '../RootStoreProvider';
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 function App() {
   
@@ -26,9 +28,12 @@ function App() {
   
   return (
     <div className="App">
-      <RootStoreProvider value={rootStore}>
-        <Board />
-      </RootStoreProvider>
+      <DndProvider backend={HTML5Backend}>
+        <RootStoreProvider value={rootStore}>
+          <h1>CHESSINGTON</h1>
+          <Board />
+        </RootStoreProvider>
+      </DndProvider>
     </div>
   );
 }

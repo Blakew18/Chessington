@@ -14,3 +14,8 @@ export const stringTo2DArray = (string, row, col) => {
 
   return arr;
 }
+
+
+export const twoDimArrayToString = (arr) => {
+  return arr.toString().replace(/,/g, '')
+}

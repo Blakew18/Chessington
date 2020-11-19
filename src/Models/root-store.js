@@ -1,10 +1,10 @@
 import { types } from 'mobx-state-tree';
-import { stringTo2DArray } from '../Service/service'
+import { stringTo2DArray, twoDimArrayToString } from '../Service/service'
 
 export const RootStoreModel = types
   .model('RootStore', {
     boardLayout: types.string,
-    playerMove: types.string,
+    whiteMove: types.boolean,
     castlingRight: types.string,
     enPassantAvailible: types.string,
     halfMoves: types.integer,
@@ -19,16 +19,26 @@ export const RootStoreModel = types
         return "YEETYUM"
       },
     }
-  });   
-  
-  
-
+  }) 
+  .actions((self) => {
+    return {
+      movePiece( pos ) {
+        let currentBoard = self.getBoardState()
+        console.log(pos)
+        currentBoard[pos.x][pos.y] = "Q"
+        self.boardLayout = twoDimArrayToString(currentBoard)
+      },
+      changePlayer() {
+        self.playerMove = !self.playerMove;
+      },
+    }
+  })  
 
 
   export const setupRootStore = async () => {
     const rs = RootStoreModel.create({
       boardLayout: "rnbqkbnrpppppppp................................PPPPPPPPRNBQKBNR", 
-      playerMove: "W",
+      whiteMove: true,
       castlingRight: "KQkq",
       enPassantAvailible: "-",
       halfMoves: 0,

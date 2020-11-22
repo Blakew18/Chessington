@@ -4,12 +4,12 @@ import { observer } from 'mobx-react';
 
 import { DragPreviewImage, useDrag } from 'react-dnd';
 
-import './Queen.css';
-import poncQueen from './icons/PONC_Queen.svg'
-import pocQueen from './icons/POC_Queen.svg'
-import realQueen from '../YEETGALE.jpg'
+import './Rook.css';
+import poncRook from './icons/PONC_Rook.svg'
+import pocRook from './icons/POC_Rook.svg'
+import realRook from '../YEETGALE.jpg'
 
-const Queen = observer(({ squareState={squareState}, currentPos={currentPos}}) => {
+const Rook = observer(({ squareState={squareState}, currentPos={currentPos}}) => {
   const objectTest = {name: squareState}
   const rootStore= useStores();
   
@@ -25,10 +25,10 @@ const Queen = observer(({ squareState={squareState}, currentPos={currentPos}}) =
 
   const getColour = (squareState) => {
     switch (true){
-      case squareState === "Q":
-        return poncQueen
-      case squareState === "q":
-        return pocQueen
+      case squareState === "R":
+        return poncRook
+      case squareState === "r":
+        return pocRook
       default:
         return null
     }
@@ -36,10 +36,10 @@ const Queen = observer(({ squareState={squareState}, currentPos={currentPos}}) =
 
   return (
     <>
-      <DragPreviewImage connect={preview} src={realQueen} />
-      <img src={getColour(squareState)} alt={squareState} className="queen" ref={drag}/>
+      <DragPreviewImage connect={preview} src={realRook} />
+      <img src={getColour(squareState)} alt={squareState} className="rook" ref={drag}/>
     </>
   )
 });
 
-export default Queen;
+export default Rook;

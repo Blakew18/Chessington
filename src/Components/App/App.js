@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Board from '../Board/Board'
 import { setupRootStore } from '../../Models/root-store'; 
 import { RootStoreProvider } from '../RootStoreProvider';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+
+import Board from '../Board/Board'
+import GameInfo from '../GameInfo/GameInfo'
 
 function App() {
   
@@ -32,6 +34,7 @@ function App() {
         <RootStoreProvider value={rootStore}>
           <h1>CHESSINGTON</h1>
           <Board />
+          <GameInfo />
         </RootStoreProvider>
       </DndProvider>
     </div>

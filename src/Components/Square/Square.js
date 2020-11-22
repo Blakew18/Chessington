@@ -1,26 +1,48 @@
 import React from 'react';
 import './Square.css';
-import Queen from '../Pieces/Queen/Queen'
 import { useStores } from '../RootStoreProvider';
 import { observer } from 'mobx-react';
 
+import Queen from '../Pieces/Queen/Queen';
+import Rook from '../Pieces/Rook/Rook';
+import Bishop from '../Pieces/Bishop/Bishop';
+
+import { queenCanMove } from '../../Service/MoveLogic/queenMoves';
+import { rookCanMove } from '../../Service/MoveLogic/rookMoves';
+import { bishopCanMove } from '../../Service/MoveLogic/bishopMoves';
 import { useDrop } from "react-dnd";
 
 const Square = observer(({ pos=pos, squareState={squareState}}) => {
 
     const rootStore= useStores(); 
     const [{ isOver, canDrop }, drop] = useDrop({
-        accept: "Q",
-        canDrop: () => canMove(),
-        drop: () => rootStore.movePiece(pos),
+        accept: ['Q','q','R','r','B','b'],
+        canDrop: (monitor) => canMove(pos, monitor.type, monitor.currentPos, rootStore.whiteMove, rootStore.getBoardState()),
+        drop: (monitor) => rootStore.movePiece(pos, monitor.type, monitor.currentPos),
         collect: (monitor) => ({
           isOver: !!monitor.isOver(),
           canDrop: !!monitor.canDrop()
         })
       });
 
-    const canMove = () =>{
-        return true
+    const canMove = (pos, type, currentPos, whiteMove, boardState) =>{
+        switch (true) {
+            case type.toLowerCase() === 'k':
+                return false
+            case type.toLowerCase() === 'q':
+                return queenCanMove(pos, type, currentPos, whiteMove,boardState)
+            case type.toLowerCase() === 'b':
+                return bishopCanMove(pos, type, currentPos, whiteMove,boardState)
+            case type.toLowerCase() === 'n':
+                return false
+            case type.toLowerCase() === 'r':
+                return rookCanMove(pos, type, currentPos, whiteMove,boardState)
+            case type.toLowerCase() === 'p':
+                return false
+            default:
+                console.log(`Error Not A Piece being moved = ${squareState}`)
+                return false
+        }
     }
 
     const setColour = () => {
@@ -34,23 +56,20 @@ const Square = observer(({ pos=pos, squareState={squareState}}) => {
 
     const getPiece = (squareState) => {
         switch (true) {
-            case squareState === 'K' || squareState === 'k':
-                //return <King squareState={squareState}/> ;
+            case squareState.toLowerCase() === 'k':
+                //return <King squareState={squareState} currentPos={pos}/> ;
                 return <div>King</div>
-            case squareState === 'Q' || squareState === 'q':
-                
-                return <Queen squareState={squareState}/>;
-            case squareState === 'B' || squareState === 'b':
-                //return <Bishop squareState={squareState}/>; 
-                return <div>Bishop</div>                   
-            case squareState === 'N' || squareState === 'n':
-                //return <Knight squareState={squareState}/>;
+            case squareState.toLowerCase() === 'q':
+                return <Queen squareState={squareState} currentPos={pos}/>;
+            case squareState.toLowerCase() === 'b':
+                return <Bishop squareState={squareState} currentPos={pos}/>;                   
+            case squareState.toLowerCase() === 'n':
+                //return <Knight squareState={squareState} currentPos={pos}/>;
                 return <div>Knight</div>          
-            case squareState === 'R' || squareState === 'r':
-                //return <Rook squareState={squareState}/>;
-                return <div>Rook</div>  
-            case squareState === 'P' || squareState === 'p':
-                //return <Pawn squareState={squareState}/>;
+            case squareState.toLowerCase() === 'r':
+                return <Rook squareState={squareState} currentPos={pos}/>;
+            case squareState.toLowerCase() === 'p':
+                //return <Pawn squareState={squareState} currentPos={pos}/>;
                 return <div>Pawn</div> 
             case squareState === '.':
                 return          

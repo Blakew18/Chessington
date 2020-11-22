@@ -22,14 +22,19 @@ export const RootStoreModel = types
   }) 
   .actions((self) => {
     return {
-      movePiece( pos ) {
+      movePiece( newPos, piece, oldPos ) {
         let currentBoard = self.getBoardState()
-        console.log(pos)
-        currentBoard[pos.x][pos.y] = "Q"
+        currentBoard[newPos.y][newPos.x] = piece
+        currentBoard[oldPos.y][oldPos.x] = "."
         self.boardLayout = twoDimArrayToString(currentBoard)
+        self.changePlayer()
+        self.halfMoves += 1
+        if (self.halfMoves % 2 === 0){
+          self.fullMoves += 1
+        }
       },
       changePlayer() {
-        self.playerMove = !self.playerMove;
+        self.whiteMove = !self.whiteMove;
       },
     }
   })  

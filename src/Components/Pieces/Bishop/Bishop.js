@@ -4,12 +4,12 @@ import { observer } from 'mobx-react';
 
 import { DragPreviewImage, useDrag } from 'react-dnd';
 
-import './Queen.css';
-import poncQueen from './icons/PONC_Queen.svg'
-import pocQueen from './icons/POC_Queen.svg'
-import realQueen from '../YEETGALE.jpg'
+import './Bishop.css';
+import poncBishop from './icons/PONC_Bishop.svg'
+import pocBishop from './icons/POC_Bishop.svg'
+import realBishop from '../YEETGALE.jpg'
 
-const Queen = observer(({ squareState={squareState}, currentPos={currentPos}}) => {
+const Bishop = observer(({ squareState={squareState}, currentPos={currentPos}}) => {
   const objectTest = {name: squareState}
   const rootStore= useStores();
   
@@ -25,10 +25,10 @@ const Queen = observer(({ squareState={squareState}, currentPos={currentPos}}) =
 
   const getColour = (squareState) => {
     switch (true){
-      case squareState === "Q":
-        return poncQueen
-      case squareState === "q":
-        return pocQueen
+      case squareState === "B":
+        return poncBishop
+      case squareState === "b":
+        return pocBishop
       default:
         return null
     }
@@ -36,10 +36,10 @@ const Queen = observer(({ squareState={squareState}, currentPos={currentPos}}) =
 
   return (
     <>
-      <DragPreviewImage connect={preview} src={realQueen} />
-      <img src={getColour(squareState)} alt={squareState} className="queen" ref={drag}/>
+      <DragPreviewImage connect={preview} src={realBishop} />
+      <img src={getColour(squareState)} alt={squareState} className="bishop" ref={drag}/>
     </>
   )
 });
 
-export default Queen;
+export default Bishop;

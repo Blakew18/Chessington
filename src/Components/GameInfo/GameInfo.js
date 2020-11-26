@@ -10,9 +10,9 @@ const GameInfo = observer(() => {
   
   const getPlayerTurn = () =>{
     if(rootStore.whiteMove){
-      return <div>White</div>
+      return <div>People Of Not Colour</div>
     }else{
-      return <div>Black</div>
+      return <div>People of Colour</div>
     }
   }
 

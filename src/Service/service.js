@@ -19,3 +19,8 @@ export const stringTo2DArray = (string, row, col) => {
 export const twoDimArrayToString = (arr) => {
   return arr.toString().replace(/,/g, '')
 }
+
+
+export const getLegalMoves = (piece, currentPos) => {
+  return [{x: 0, y: 0}, {x: 1, y:1}]; 
+}

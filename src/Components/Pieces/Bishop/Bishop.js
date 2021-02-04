@@ -14,7 +14,7 @@ const Bishop = observer(({ squareState={squareState}, currentPos={currentPos}}) 
   const rootStore= useStores();
   
   const [{ isDragging }, drag, preview] = useDrag({
-    item: { type: objectTest.name, currentPos: currentPos },
+    item: { type: objectTest.name, currentPos: currentPos},
 
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
@@ -22,6 +22,10 @@ const Bishop = observer(({ squareState={squareState}, currentPos={currentPos}}) 
 
     })
   });
+
+  const getLegalMoves = () => {
+    rootStore.getLegalMoves(squareState, currentPos);  
+  }
 
   const getColour = (squareState) => {
     switch (true){
@@ -37,7 +41,11 @@ const Bishop = observer(({ squareState={squareState}, currentPos={currentPos}}) 
   return (
     <>
       <DragPreviewImage connect={preview} src={realBishop} />
-      <img src={getColour(squareState)} alt={squareState} className="bishop" ref={drag}/>
+      <img src={getColour(squareState)} 
+           alt={squareState} 
+           className="bishop" 
+           ref={drag}
+           onMouseDown={getLegalMoves}/>
     </>
   )
 });

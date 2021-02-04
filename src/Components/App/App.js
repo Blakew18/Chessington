@@ -11,7 +11,6 @@ import GameInfo from '../GameInfo/GameInfo'
 function App() {
   
   const [rootStore, setRootStore] = useState();
-
   
   useEffect(() => {
 

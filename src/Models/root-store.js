@@ -1,5 +1,6 @@
 import { types } from 'mobx-state-tree';
-import { stringTo2DArray, twoDimArrayToString } from '../Service/service'
+import { stringTo2DArray, twoDimArrayToString, getLegalMoves } from '../Service/service'
+
 
 export const RootStoreModel = types
   .model('RootStore', {
@@ -9,7 +10,12 @@ export const RootStoreModel = types
     enPassantAvailible: types.string,
     halfMoves: types.integer,
     fullMoves: types.integer,
-  })
+    legalMoves: types.array(types.model({
+      x: types.integer, 
+      y: types.integer 
+    }))
+  }) 
+
   .views((self) => {
     return { 
       getBoardState() {
@@ -20,6 +26,7 @@ export const RootStoreModel = types
       },
     }
   }) 
+  
   .actions((self) => {
     return {
       movePiece( newPos, piece, oldPos ) {
@@ -36,6 +43,12 @@ export const RootStoreModel = types
       changePlayer() {
         self.whiteMove = !self.whiteMove;
       },
+      getLegalMoves(piece, currentPos) {
+        self.legalMoves = getLegalMoves(piece, currentPos);
+      },
+      clearLegalMoves() {
+        self.legalMoves = []; 
+      }
     }
   })  
 
@@ -47,7 +60,7 @@ export const RootStoreModel = types
       castlingRight: "KQkq",
       enPassantAvailible: "-",
       halfMoves: 0,
-      fullMoves: 0
+      fullMoves: 0,
     })
     return rs
   }

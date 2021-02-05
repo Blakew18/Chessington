@@ -13,7 +13,7 @@ const Board = observer(() => {
         <div className="boardSize"> 
             {rootStore.getBoardState().map(function(subarray,rowNum){
                 return subarray.map(function(squareState, colNum){
-                    return <Square key={rowNum,colNum} pos={{x:colNum, y:rowNum}} squareState={squareState}/>
+                    return <Square key={rowNum, colNum} pos={{x:colNum, y:rowNum}} squareState={squareState}/>
                 })
             })} 
         </div>

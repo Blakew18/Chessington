@@ -1,3 +1,34 @@
+export const isDiagonalMove = (currentPos, newPos, boardState) => {
+
+  const xDiff = Math.abs(currentPos.x - newPos.x);
+  const yDiff = Math.abs(currentPos.y - newPos.y);
+  
+  if (xDiff === yDiff) {
+    return true
+  } else {
+    return false
+  } 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-----------------------------------------------------------------
 export const isVerticalMove = (currentPos, newPos, boardState) => {
   if ( currentPos.x === newPos.x && !obstructedVertical(currentPos, newPos, boardState) ){
     return true
@@ -14,17 +45,6 @@ export const isHorizontalMove = (currentPos, newPos, boardState) => {
   }
 }
 
-export const isDiagonalMove = (currentPos, newPos, boardState) => {
-
-  const xDiff = Math.abs(currentPos.x - newPos.x);
-  const yDiff = Math.abs(currentPos.y - newPos.y);
-  
-  if (xDiff === yDiff) {
-    return true
-  } else {
-    return false
-  } 
-}
 
 const obstructedVertical = (currentPos, newPos, boardState ) => {
 
@@ -35,7 +55,7 @@ const obstructedVertical = (currentPos, newPos, boardState ) => {
     var i = startPoint + 1
     while ( i < endPoint ){
       console.log(i)
-      if(boardState[i][currentPos.x] != "."){
+      if(boardState[i][currentPos.x] !== "."){
         return true
       } 
       i++
@@ -43,19 +63,17 @@ const obstructedVertical = (currentPos, newPos, boardState ) => {
     }
 
   } else {
-    console.log("ELSE")
-    var i = startPoint - 1
-    while ( i > endPoint ){
-      if(boardState[i][currentPos.x] != "."){
+    var j = startPoint - 1
+    while ( j > endPoint ){
+      if(boardState[j][currentPos.x] !== "."){
         return true
       } 
-      i--
+      j--
     return false
     } 
 
   }
   
-  
-
-
 }
+
+

@@ -11,15 +11,14 @@ import realBishop from '../YEETGALE.jpg'
 
 const Bishop = observer(({ squareState={squareState}, currentPos={currentPos}}) => {
   const objectTest = {name: squareState}
-  const rootStore= useStores();
+  const rootStore = useStores();
   
   const [{ isDragging }, drag, preview] = useDrag({
+    end: (item, monitor) => (rootStore.clearLegalMoves()),
     item: { type: objectTest.name, currentPos: currentPos},
-
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
       piece: squareState,
-
     })
   });
 

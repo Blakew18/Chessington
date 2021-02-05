@@ -21,8 +21,10 @@ export const RootStoreModel = types
       getBoardState() {
         return stringTo2DArray(self.boardLayout, 8,8)
       },
-      yeeticus() {
-        return "YEETYUM"
+      availableLegalMoves() {
+        return self.legalMoves.map((move) => {
+          return {x: move.x, y:move.y}
+        })
       },
     }
   }) 
@@ -44,7 +46,7 @@ export const RootStoreModel = types
         self.whiteMove = !self.whiteMove;
       },
       getLegalMoves(piece, currentPos) {
-        self.legalMoves = getLegalMoves(piece, currentPos);
+        self.legalMoves = getLegalMoves(piece, currentPos, self.getBoardState(), self.whiteMove);
       },
       clearLegalMoves() {
         self.legalMoves = []; 
@@ -56,6 +58,7 @@ export const RootStoreModel = types
   export const setupRootStore = async () => {
     const rs = RootStoreModel.create({
       boardLayout: "rnbqkbnrpppppppp................................PPPPPPPPRNBQKBNR", 
+      //boardLayout: "rnbqkbnr................................................RNBQKBNR", 
       whiteMove: true,
       castlingRight: "KQkq",
       enPassantAvailible: "-",

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Square.css';
 import { useStores } from '../RootStoreProvider';
 import { observer } from 'mobx-react';
@@ -7,18 +7,15 @@ import Queen from '../Pieces/Queen/Queen';
 import Rook from '../Pieces/Rook/Rook';
 import Bishop from '../Pieces/Bishop/Bishop';
 
-import { queenCanMove } from '../../Service/MoveLogic/queenMoves';
-import { rookCanMove } from '../../Service/MoveLogic/rookMoves';
-import { bishopCanMove } from '../../Service/MoveLogic/bishopMoves';
 import { useDrop } from "react-dnd";
 
 const Square = observer(({ pos=pos, squareState={squareState}}) => {
 
-    const rootStore= useStores(); 
-
+    const rootStore = useStores(); 
+    const legalMoves = rootStore.availableLegalMoves()
     const [{ isOver, canDrop }, drop] = useDrop({
         accept: ['Q','q','R','r','B','b'],
-        canDrop: (monitor) => canMove(pos, monitor.type, monitor.currentPos, rootStore.whiteMove, rootStore.getBoardState()),
+        canDrop: (monitor) => canMove(),
         drop: (monitor) => {
             rootStore.movePiece(pos, monitor.type, monitor.currentPos)
             rootStore.clearLegalMoves();      
@@ -29,52 +26,31 @@ const Square = observer(({ pos=pos, squareState={squareState}}) => {
         })
       });
 
-    const canMove = (pos, type, currentPos, whiteMove, boardState) =>{
-        switch (true) {
-            case type.toLowerCase() === 'k':
-                return false
-            case type.toLowerCase() === 'q':
-                return queenCanMove(pos, type, currentPos, whiteMove,boardState)
-            case type.toLowerCase() === 'b':
-                return bishopCanMove(pos, type, currentPos, whiteMove,boardState)
-            case type.toLowerCase() === 'n':
-                return false
-            case type.toLowerCase() === 'r':
-                return rookCanMove(pos, type, currentPos, whiteMove,boardState)
-            case type.toLowerCase() === 'p':
-                return false
-            default:
-                console.log(`Error Not A Piece being moved = ${squareState}`)
-                return false
-        }
+    const canMove = () =>{
+        let legal = false
+        legalMoves.forEach((move) => {
+            if (move.x === pos.x && move.y === pos.y){
+                console.log("REACHED")
+                legal =  true
+            }
+        })
+        return legal
     }
-
-    const setOverlay = () => {
-        console.log("SET OVERLAY")
+    const setColour = () => { 
+        let overLay = false
         if (rootStore.legalMoves.length > 0) {
-            return (
-                <div>
-                    Yeet
-                </div>
-            )
+            
+            legalMoves.forEach((move) => {
+                if (move.x === pos.x && move.y === pos.y){
+                    overLay = true
+                }
+            })
         }
-    }
-
-    const setColour = () => {
-        // Sets Colours for Each Square. If Row and Col are both Even OR Row and Col are both Odd then White else Black
-
-        // if (rootStore.legalMoves.length > 0) {
-        //     if (rootStore.legalMoves.includes(pos)) {
-        //         return "Red"
-        //     }
-        // }
-
         if (pos.x % 2 === 0 & pos.y % 2 === 0 || pos.x % 2 !== 0 & pos.y % 2 !== 0 ){
-            return "White"
+            return overLay ? "#FFA9A4" : "White"
         }
-        
         else {
-            return "Gray"
+            return overLay ? "#B75C58" : "Gray"
         }
     }
 
@@ -105,7 +81,6 @@ const Square = observer(({ pos=pos, squareState={squareState}}) => {
 
         return (
         <div style={{backgroundColor:setColour()}} className="square" ref={drop} > 
-            {setOverlay()}
             {getPiece(squareState)}
         </div>
         )

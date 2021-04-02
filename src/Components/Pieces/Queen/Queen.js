@@ -14,6 +14,7 @@ const Queen = observer(({ squareState={squareState}, currentPos={currentPos}}) =
   const rootStore= useStores();
   
   const [{ isDragging }, drag, preview] = useDrag({
+    end: (item, monitor) => (rootStore.clearLegalMoves()),
     item: { type: objectTest.name, currentPos: currentPos },
 
     collect: (monitor) => ({
@@ -23,6 +24,9 @@ const Queen = observer(({ squareState={squareState}, currentPos={currentPos}}) =
     })
   });
 
+  const getLegalMoves = () => {
+    rootStore.getLegalMoves(squareState, currentPos);  
+  }
   const getColour = (squareState) => {
     switch (true){
       case squareState === "Q":
@@ -37,7 +41,11 @@ const Queen = observer(({ squareState={squareState}, currentPos={currentPos}}) =
   return (
     <>
       <DragPreviewImage connect={preview} src={realQueen} />
-      <img src={getColour(squareState)} alt={squareState} className="queen" ref={drag}/>
+      <img src={getColour(squareState)} 
+      alt={squareState} 
+      className="queen" 
+      ref={drag}
+      onMouseDown={getLegalMoves}/>
     </>
   )
 });

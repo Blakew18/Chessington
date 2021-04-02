@@ -14,6 +14,7 @@ const Rook = observer(({ squareState={squareState}, currentPos={currentPos}}) =>
   const rootStore= useStores();
   
   const [{ isDragging }, drag, preview] = useDrag({
+    end: (item, monitor) => (rootStore.clearLegalMoves()),
     item: { type: objectTest.name, currentPos: currentPos },
 
     collect: (monitor) => ({
@@ -22,6 +23,10 @@ const Rook = observer(({ squareState={squareState}, currentPos={currentPos}}) =>
 
     })
   });
+
+  const getLegalMoves = () => {
+    rootStore.getLegalMoves(squareState, currentPos);  
+  }
 
   const getColour = (squareState) => {
     switch (true){
@@ -37,7 +42,11 @@ const Rook = observer(({ squareState={squareState}, currentPos={currentPos}}) =>
   return (
     <>
       <DragPreviewImage connect={preview} src={realRook} />
-      <img src={getColour(squareState)} alt={squareState} className="rook" ref={drag}/>
+      <img src={getColour(squareState)} 
+           alt={squareState} 
+           className="rook" 
+           ref={drag}
+           onMouseDown={getLegalMoves}/>
     </>
   )
 });

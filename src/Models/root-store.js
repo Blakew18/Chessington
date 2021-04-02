@@ -58,7 +58,7 @@ export const RootStoreModel = types
   export const setupRootStore = async () => {
     const rs = RootStoreModel.create({
       //boardLayout: "rnbqkbnrpppppppp................................PPPPPPPPRNBQKBNR", 
-      boardLayout: "rnbqkbnr..............................................BBRNBQKBNR", 
+      boardLayout: "rnbqkbnr.....................R........................BBRNBQKBNR", 
       whiteMove: true,
       castlingRight: "KQkq",
       enPassantAvailible: "-",

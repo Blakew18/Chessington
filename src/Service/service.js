@@ -1,4 +1,6 @@
-import {getBishopLegalMoves} from './MoveLogic/bishopLogic.js'
+import {getLegalDiagonalMoves} from './MoveLogic/diagonalLogic.js';
+import {getLegalAxialMoves} from './MoveLogic/axialLogic.js';
+
 
 export const stringTo2DArray = (string, row, col) => {
   const arr = [];
@@ -24,15 +26,17 @@ export const twoDimArrayToString = (arr) => {
 export const getLegalMoves = (piece, currentPos, boardState, whiteMove) => {
   switch (true) {
     case piece.toLowerCase() === 'b':
-        return getBishopLegalMoves(piece, currentPos, boardState, whiteMove)
-    // case piece.toLowerCase() === 'q':
-    //     return queenCanMove(pos, type, currentPos, whiteMove,boardState)
+        return getLegalDiagonalMoves(piece, currentPos, boardState, whiteMove)
+    case piece.toLowerCase() === 'q':
+      let arr1 = getLegalDiagonalMoves(piece, currentPos, boardState, whiteMove)
+      let arr2 = getLegalAxialMoves(piece, currentPos, boardState, whiteMove)
+      return arr1.concat(arr2)
     // case piece.toLowerCase() === 'b':
     //     return bishopCanMove(pos, type, currentPos, whiteMove,boardState)
     // case piece.toLowerCase() === 'n':
     //     return false
-    // case piece.toLowerCase() === 'r':
-    //     return rookCanMove(pos, type, currentPos, whiteMove,boardState)
+    case piece.toLowerCase() === 'r':
+        return getLegalAxialMoves(piece, currentPos, boardState, whiteMove)
     // case piece.toLowerCase() === 'p':
     //     return false
     default:

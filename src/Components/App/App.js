@@ -29,7 +29,7 @@ function App() {
   
   return (
     <div className="App">
-      <DndProvider backend={TouchBackend} options={{ enableMouseEvents: true }}>
+      <DndProvider backend={HTML5Backend}>
         <RootStoreProvider value={rootStore}>
           <h1>CHESSINGTON</h1>
           <Board />

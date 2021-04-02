@@ -26,7 +26,7 @@ const Square = observer(({ pos=pos, squareState={squareState}}) => {
         })
       });
 
-    const canMove = () =>{
+    const canMove = () => {
         let legal = false
         legalMoves.forEach((move) => {
             if (move.x === pos.x && move.y === pos.y){

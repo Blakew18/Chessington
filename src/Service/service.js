@@ -1,6 +1,6 @@
-import {getLegalDiagonalMoves} from './MoveLogic/diagonalLogic.js';
-import {getLegalAxialMoves} from './MoveLogic/axialLogic.js';
-
+import { getLegalDiagonalMoves } from './MoveLogic/diagonalLogic.js';
+import { getLegalAxialMoves } from './MoveLogic/axialLogic.js';
+import { getLegalKnightMoves } from './MoveLogic/knightLogic.js';
 
 export const stringTo2DArray = (string, row, col) => {
   const arr = [];
@@ -33,8 +33,8 @@ export const getLegalMoves = (piece, currentPos, boardState, whiteMove) => {
       return arr1.concat(arr2)
     // case piece.toLowerCase() === 'b':
     //     return bishopCanMove(pos, type, currentPos, whiteMove,boardState)
-    // case piece.toLowerCase() === 'n':
-    //     return false
+    case piece.toLowerCase() === 'n':
+      return getLegalKnightMoves(piece, currentPos, boardState, whiteMove)
     case piece.toLowerCase() === 'r':
         return getLegalAxialMoves(piece, currentPos, boardState, whiteMove)
     // case piece.toLowerCase() === 'p':

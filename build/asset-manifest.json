@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a032513f.chunk.css",
+    "main.js": "/static/js/main.d6728f07.chunk.js",
+    "main.js.map": "/static/js/main.d6728f07.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.422478f4.js",
+    "runtime-main.js.map": "/static/js/runtime-main.422478f4.js.map",
+    "static/js/2.5034eb0f.chunk.js": "/static/js/2.5034eb0f.chunk.js",
+    "static/js/2.5034eb0f.chunk.js.map": "/static/js/2.5034eb0f.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.99f9de0a4b614080e60a4e1a43c76b46.js": "/precache-manifest.99f9de0a4b614080e60a4e1a43c76b46.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.a032513f.chunk.css.map": "/static/css/main.a032513f.chunk.css.map",
+    "static/js/2.5034eb0f.chunk.js.LICENSE.txt": "/static/js/2.5034eb0f.chunk.js.LICENSE.txt",
+    "static/media/POC_Bishop.svg": "/static/media/POC_Bishop.562afbca.svg",
+    "static/media/POC_Knight.svg": "/static/media/POC_Knight.57cd06ca.svg",
+    "static/media/POC_Queen.svg": "/static/media/POC_Queen.2b84eb91.svg",
+    "static/media/POC_Rook.svg": "/static/media/POC_Rook.618961c2.svg",
+    "static/media/PONC_Bishop.svg": "/static/media/PONC_Bishop.31190906.svg",
+    "static/media/PONC_Knight.svg": "/static/media/PONC_Knight.78f6501d.svg",
+    "static/media/PONC_Queen.svg": "/static/media/PONC_Queen.fe620724.svg",
+    "static/media/PONC_Rook.svg": "/static/media/PONC_Rook.af8ebcf9.svg",
+    "static/media/YEETGALE.jpg": "/static/media/YEETGALE.14bc3c60.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.422478f4.js",
+    "static/js/2.5034eb0f.chunk.js",
+    "static/css/main.a032513f.chunk.css",
+    "static/js/main.d6728f07.chunk.js"
+  ]
+}

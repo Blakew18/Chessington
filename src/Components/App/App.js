@@ -4,7 +4,7 @@ import { setupRootStore } from '../../Models/root-store';
 import { RootStoreProvider } from '../RootStoreProvider';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-
+import { TouchBackend } from 'react-dnd-touch-backend'
 import Board from '../Board/Board'
 import GameInfo from '../GameInfo/GameInfo'
 
@@ -29,7 +29,7 @@ function App() {
   
   return (
     <div className="App">
-      <DndProvider backend={HTML5Backend}>
+      <DndProvider backend={TouchBackend} options={{ enableMouseEvents: true }}>
         <RootStoreProvider value={rootStore}>
           <h1>CHESSINGTON</h1>
           <Board />

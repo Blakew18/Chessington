@@ -6,6 +6,7 @@ import { observer } from 'mobx-react';
 import Queen from '../Pieces/Queen/Queen';
 import Rook from '../Pieces/Rook/Rook';
 import Bishop from '../Pieces/Bishop/Bishop';
+import Knight from '../Pieces/Knight/Knight';
 
 import { useDrop } from "react-dnd";
 
@@ -64,8 +65,7 @@ const Square = observer(({ pos=pos, squareState={squareState}}) => {
             case squareState.toLowerCase() === 'b':
                 return <Bishop squareState={squareState} currentPos={pos}/>;                   
             case squareState.toLowerCase() === 'n':
-                //return <Knight squareState={squareState} currentPos={pos}/>;
-                return <div>Knight</div>          
+                return <Knight squareState={squareState} currentPos={pos}/>;         
             case squareState.toLowerCase() === 'r':
                 return <Rook squareState={squareState} currentPos={pos}/>;
             case squareState.toLowerCase() === 'p':

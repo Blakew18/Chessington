@@ -15,7 +15,7 @@ const Square = observer(({ pos=pos, squareState={squareState}}) => {
     const rootStore = useStores(); 
     const legalMoves = rootStore.availableLegalMoves()
     const [{ isOver, canDrop }, drop] = useDrop({
-        accept: ['Q','q','R','r','B','b'],
+        accept: ['Q','q','R','r','B','b','N','n'],
         canDrop: (monitor) => canMove(),
         drop: (monitor) => {
             rootStore.movePiece(pos, monitor.type, monitor.currentPos)
